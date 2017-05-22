@@ -1,10 +1,14 @@
 
+require_relative 'wallet'
 
-class 
+class Player
     
-    
+    attr_accessor :wallet, :name
+
     def initialize (args)
-        
-        puts 'Hello'
+       @wallet = args[:wallet] 
+       @name = args[:name]
     end
+
+
 end
