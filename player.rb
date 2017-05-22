@@ -15,9 +15,13 @@ class Player
         puts 'What is your name?'
         name = gets.strip
         puts 'How old are you?'
-        age = gets.strip.to_i
+        temp_age = gets.strip.to_i
+        check_age(temp_age)
         puts 'How much money do you have?'
-        wallet.add_money(gets.strip.to_i)
+        temp_balance = gets.strip.to_i
+        check_balance(temp_balance)
+
+
     end
 
     def check_bet(bet)
@@ -30,4 +34,21 @@ class Player
         end
     end
 
+    def check_age(temp_age)
+        if temp_age < 18
+            puts 'GTFO'
+            exit
+        else
+            age = temp_age
+        end
+    end
+
+    def check_balance(temp_balance)
+        if temp_balance <= 100
+            puts 'GTFO'
+            exit
+        else
+            wallet.add_money(temp_balance)
+        end
+    end
 end

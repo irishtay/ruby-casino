@@ -2,14 +2,15 @@ require 'pry'
 require 'colorize'
 
 require_relative 'people'
+require_relative 'gaming_options'
 
 class Casino
-  attr_accessor :people, :games
+  attr_accessor :people, :gaming_options
 
   def initialize
     puts 'Welcome to our Casino'
     @people = People.new
-    # @games = games.new
+    @gaming_options = Gaming_options.new
     display_menu
   end
 
@@ -23,7 +24,7 @@ class Casino
 
     case menu_selection
       when 1
-        # Create Game
+        gaming_options.display_menu_of_games
       when 2
         # Buy Food or Drink
       when 3 || 4
