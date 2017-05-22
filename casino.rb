@@ -15,7 +15,6 @@ class Casino
 
     def casino_menu
 
-
     end
 end
 
