@@ -29,6 +29,5 @@ class Player
             return true
         end
     end
->>>>>>> 4ca41831e9bc7a79568320c12f959cad567ac2ee
 
 end
