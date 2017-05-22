@@ -15,9 +15,9 @@ class Player
         puts 'What is your name?'
         name = gets.strip
         puts 'How old are you?'
-        age = gets.strip
+        age = gets.strip.to_i
         puts 'How much money do you have?'
-        wallet.add_money = gets.strip.to_i
+        wallet.add_money(gets.strip.to_i)
     end
 
     def check_bet(bet)

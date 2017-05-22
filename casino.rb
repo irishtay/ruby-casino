@@ -1,14 +1,14 @@
 require 'pry'
 require 'colorize'
 
-require_relative 'player'
+require_relative 'people'
 
 class Casino
   attr_accessor :people, :games
 
   def initialize
     puts 'Welcome to our Casino'
-    @people = people.new
+    @people = People.new
     # @games = games.new
     display_menu
   end

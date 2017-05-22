@@ -1,15 +1,12 @@
 
-require_relative 'wallet'
-
 class Wallet
 
   def initialize
-    @balance
+    @balance = 0
   end
 
   def add_money(num)
    @balance += num
-
   end
 
   def remove_balance
