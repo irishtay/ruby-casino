@@ -9,7 +9,7 @@ class Casino
   def initialize
     puts 'Welcome to our Casino'
     @people = people.new
-    @games = games.new
+    # @games = games.new
     display_menu
   end
 

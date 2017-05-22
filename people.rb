@@ -3,7 +3,7 @@ class People
 
   def initialize
     @players = []
-    @players<< Player.new(wallet.new)
+    @players << Player.new(wallet.new)
   end
 
 
