@@ -3,17 +3,14 @@ require 'colorize'
 
 require_relative 'player'
 
-
 class Casino
-    attr_reader :player
+  attr_accessor :player
 
     def initialize
         puts "Welcome to our Ruby Casino!"
-        @player = Player.new ( { wallet: Wallet.new, name: "John" } )
+        @player = Player.new
     end
 end
 
 
-
-casino = Casino.new
-puts casino.player.wallet.balance
+Casino.new

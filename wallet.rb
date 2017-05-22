@@ -3,9 +3,21 @@ require_relative 'wallet'
 
 class Wallet
 
-    attr_accessor :balance
+  def initialize
+    @balance
+  end
 
-    def initialize
-        @balance = 100.00 
-    end
+  def add_money(num)
+   @balance += num
+
+  end
+
+  def remove_balance
+    @balance -= num
+  end
+
+  def get_balance
+    @balance
+  end
+
 end
