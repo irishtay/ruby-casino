@@ -8,7 +8,14 @@ class Casino
 
     def initialize
         puts "Welcome to our Ruby Casino!"
-        @player = Player.new
+        @player = Player.new ( { wallet: Wallet.new, name: "John" } )
+        casino_menu
+    end
+
+
+    def casino_menu
+
+
     end
 end
 
