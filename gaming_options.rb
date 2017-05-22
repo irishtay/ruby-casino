@@ -1,10 +1,12 @@
 require_relative 'blackjack'
+require_relative 'russianroulette'
 
 class Gaming_options
 
-  def initialize
+  def initialize(player)
     @games = []
-    @games << Blackjack.new
+    @games << Blackjack.new(self, player)
+    @games << RussianRoulette.new(self, player)
     # Add New Games Here
 
   end
@@ -19,7 +21,7 @@ class Gaming_options
     when 1
         @games[game_selection - 1].start_game
     when 2
-
+        @games[game_selection - 1].start_game
     end
 
   end

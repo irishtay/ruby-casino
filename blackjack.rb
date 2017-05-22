@@ -2,8 +2,9 @@
 class Blackjack
 
   attr_reader :name
-  def initialize
+  def initialize(game_options, player)
     @name = 'Blackjack'
+    @options = game_options
   end
 
   def start_game

@@ -13,7 +13,8 @@ class Player
 
     def get_player_info
         puts 'What is your name?'
-        name = gets.strip
+        @name = gets.strip
+
         puts 'How old are you?'
         temp_age = gets.strip.to_i
         check_age(temp_age)
@@ -39,7 +40,7 @@ class Player
             puts 'GTFO'
             exit
         else
-            age = temp_age
+            @age = temp_age
         end
     end
 
