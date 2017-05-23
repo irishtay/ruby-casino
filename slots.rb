@@ -13,12 +13,21 @@ class Slots
 
   def start_game
     puts 'Welcome To Slots!'
+    puts "Your Current Balance is #{player.wallet.get_balance}"
+    puts "Place Your Bet"
+    bet = gets.strip.to_i
+
     puts 'Pull the Lever (Press Enter)'
     gets
 
-    puts "#{@reel.sample} #{@reel.sample} #{@reel.sample}"
-    puts ""
-    puts ""
+    print '.'
+    sleep(1)
+    print '.'
+    sleep(1)
+    print ". \n\n"
+    sleep(1)
+
+    puts "#{@reel.sample.capitalize} || #{@reel.sample.capitalize} || #{@reel.sample.capitalize} \n\n"
     slots_menu
   end
 
@@ -36,5 +45,10 @@ class Slots
       else
         puts "Invalid input, try again"
     end
+
+  end
+
+  def results
+    
   end
 end
