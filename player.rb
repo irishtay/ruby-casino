@@ -4,10 +4,11 @@ require_relative 'wallet'
 class Player
 
 
-    attr_accessor :wallet, :name, :age
+    attr_accessor :wallet, :name, :age, :purchased_items
 
     def initialize (wallet)
        @wallet = wallet
+       @purchased_items = []
        get_player_info
     end
 
