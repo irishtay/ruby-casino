@@ -32,12 +32,13 @@ class RussianRoulette
       sleep (1)
       puts "Alright, Place Your Bet"
       puts "Your Current Balance is #{player.wallet.get_balance}."
-      answer = gets.chomp.to_i
+      answer = gets.chomp
 
-      if answer <= player.wallet.get_balance
+      if answer.to_i <= player.wallet.get_balance && validate_bet?(answer)
       puts "\nSpin the Cylinder (Press Enter)"
       gets
-      sleep(1)
+      pid = fork{ exec 'afplay', "cylinder.mp3" }
+      sleep(2)
       puts "Gun To Head"
 
       print '.'
@@ -50,8 +51,9 @@ class RussianRoulette
         result = possibilities.sample
           if result == 'click'
             pid = fork{ exec 'afplay', "gun-trigger-click-01.mp3" }
+            sleep(1)
             puts "\nCongratulations #{@player.name}, you've survived!\n\n"
-            player.wallet.add_money(answer * 2)
+            player.wallet.add_money(answer.to_i * 2)
             prompt = TTY::Prompt.new
             play_option = prompt.select("What's Next?", ["Play Again", "Double Down", "Quit While You're Alive"])
 
@@ -74,10 +76,18 @@ class RussianRoulette
             puts "BANG! You're Dead!"
             sleep(1)
             puts `pmset sleepnow`
+            puts `clear`
+            exit
           end
       else
-        puts 'You do not have enough money'
+        puts "You do not have enough money \n"
+        puts `clear`
         play_new_game
       end
     end
+
+    def validate_bet?(bet)
+      !!(bet =~ /^\d+$/)
+    end
+
 end

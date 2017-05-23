@@ -9,7 +9,7 @@ class Slots
     @name = 'Slots'
     @options = gaming_options
     @player = player
-    @reel = ['apple', 'orange', '--', 'cherry', 'bell', '--', 'grapes', 'clover', '--', 'heart', 'diamond', 'bar', 'coin', 'lemon']
+    @reel = ['apple', 'cherry', 'clover', 'heart', 'diamond', 'bar', 'coin']
     @reel1 = ""
     @reel2 = ""
     @reel3 = ""
@@ -31,19 +31,28 @@ class Slots
       options.display_menu_of_games
     end
 
-    player.wallet.remove_balance(1)
+    pid = fork{ exec 'afplay', "slots_lever.mp3" }
 
+    sleep(1)
+
+    player.wallet.remove_balance(1)
 
     @reel1 = @reel.sample.capitalize
     @reel2 = @reel.sample.capitalize
     @reel3 = @reel.sample.capitalize
 
+
         sleep(1)
+        pid = fork{ exec 'afplay', "reel_click.mp3" }
         print "\n#{@reel1}  "
         sleep(1)
+        pid = fork{ exec 'afplay', "reel_click.mp3" }
         print "#{@reel2}  "
         sleep(1)
+        pid = fork{ exec 'afplay', "reel_click.mp3" }
         print "#{@reel3} \n\n"
+
+        sleep(1)
 
     @play_result = "#{@reel1} || #{@reel2} || #{@reel3}"
 
@@ -72,6 +81,7 @@ class Slots
   def results
     reel_array = [@reel1, @reel2, @reel3]
     if @play_result == "Bar || Bar || Bar"
+      pid = fork{ exec 'afplay', "money_drop.mp3" }
       puts "JACKPOT: 1 Million Dollars!"
       puts "------"
       player.wallet.add_money(1000000)
@@ -109,6 +119,7 @@ class Slots
       puts "Your Balance is now #{player.wallet.get_balance}\n\n"
 
     else
+      pid = fork{ exec 'afplay', "sad_tromboine.mp3" }
       puts "Better Luck Next Time \n\n"
     end
   slots_menu

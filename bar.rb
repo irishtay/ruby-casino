@@ -21,16 +21,18 @@ class Bar
         answer = prompt.select("What would you like to buy?", [ (drinks.map { |drink| "#{drink.name} ($#{drink.cost})"  }), "Return to the casino"])
 
         case answer
-            when 'Beer'
+            when 'Beer ($15)'
                 selected_drink = drinks[0].clone
                 player.drinks << selected_drink
                 player.wallet.remove_balance(selected_drink.cost)
+                pid = fork{ exec 'afplay', "open_beer_1.mp3" }
                 puts `clear`
                 leave
-            when 'Wine'
+            when 'Wine ($21)'
                 selected_drink = drinks[0].clone
                 player.drinks << selected_drink
                 player.wallet.remove_balance(selected_drink.cost)
+                pid = fork{ exec 'afplay', "cork.mp3" }
                 puts `clear`
                 leave
             when 'Return to the casino'
@@ -54,5 +56,5 @@ class Bar
         end
 
     end
-    
+
 end
