@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    babbler (2.0.0)
     catpix (0.2.0)
       docopt (~> 0.5, >= 0.5.0)
       rmagick (~> 2.15, >= 2.15.2)
@@ -36,6 +37,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  babbler
   catpix
   colorize
   pry

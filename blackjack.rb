@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'babbler'
 require_relative 'cards'
 
 class Blackjack
@@ -15,9 +16,48 @@ class Blackjack
   end
 
   def start_game
+
     puts `clear`
     puts 'Welcome to BlackJack!'
-    play_game
+    if player.is_drunk?
+      puts "You are drunk"
+      prompt = TTY::Prompt.new
+
+      answer = prompt.select("\nYou can either?", ["Buy some coffee for $20", "Play it off"])
+
+      if answer == "Buy some coffee for $20"
+        player.wallet.remove_balance(20)
+        player.drinks.clear
+        puts "Enjoy your game."
+      elsif answer == "Play it off"
+        Babbler.babble(30)
+        random_num = (-player.wallet.get_balance..player.wallet.get_balance).to_a.sample
+        if random_num < 0 
+          puts "You can't remember what happended but..."
+          sleep(4)
+          puts "You just lost $#{random_num}"
+          player.wallet.remove_balance(random_num)
+          sleep(6)
+          options.display_menu_of_games
+        elsif random_num > 0
+          puts "You can't remember what happended but..."
+          sleep(4)
+          puts "You just won $#{random_num}"
+          player.wallet.add_money(random_num)
+          sleep(6)
+          options.display_menu_of_games
+        else
+          puts "You can't remember what happended but..."
+          sleep(6)
+          puts "I think you had fun"
+          sleep(5)
+          options.display_menu_of_games
+        end
+      end
+      
+    else
+      play_game
+    end
   end
 
   def play_game
@@ -193,11 +233,7 @@ class Blackjack
     prompt = TTY::Prompt.new
 
     answer = prompt.select("\nWould you like to play again?", ["Yes", "No"])
-    #puts "\nWould you like to play again?"
-    #puts "1) Yes"
-    #puts "2) No"
 
-    #answer = gets.chomp
 
     if answer == 'Yes'
       reset_deck
