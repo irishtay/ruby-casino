@@ -4,12 +4,15 @@ require_relative 'wallet'
 class Player
 
 
-    attr_accessor :wallet, :name, :age, :purchased_items
+    attr_accessor :wallet, :name, :age, :purchased_items, :count, :drinks
 
     def initialize (wallet)
        @wallet = wallet
        @purchased_items = []
+       @drinks = []
+       @count
        get_player_info
+       
     end
 
     def get_player_info
@@ -66,4 +69,11 @@ class Player
             wallet.add_money(temp_balance)
         end
     end
+
+    
+    def is_drunk?
+        drinks.count >= 2
+    end
+    
+
 end
