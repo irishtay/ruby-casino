@@ -15,7 +15,7 @@ class RussianRoulette
 
     prompt = TTY::Prompt.new
     play_option = prompt.select("Are You Sure You Want To Play #{name}", ["Yes", "No"])
-    binding.pry
+
 
     if play_option == "No"
       puts "pansy"
@@ -49,6 +49,7 @@ class RussianRoulette
 
         result = possibilities.sample
           if result == 'click'
+            pid = fork{ exec 'afplay', "gun-trigger-click-01.mp3" }
             puts "\nCongratulations #{@player.name}, you've survived!\n\n"
             player.wallet.add_money(answer * 2)
             prompt = TTY::Prompt.new
@@ -69,8 +70,9 @@ class RussianRoulette
 
           else
             sleep (1)
+            pid = fork{ exec 'afplay', "gun-gunshot-01.mp3" }
             puts "BANG! You're Dead!"
-            sleep(2)
+            sleep(1)
             puts `pmset sleepnow`
           end
       else
