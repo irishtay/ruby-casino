@@ -39,7 +39,7 @@ class Giftshop
                 puts "Thank you for your purchase. Your balance is now #{player.wallet.get_balance}"
                 exit_casino
             when 'I had to buy this stupid key chain to leave'
-                purchased_item = items[3].clone
+                purchased_item = items[2].clone
                 player.wallet.remove_balance(purchased_item.cost)
                 player.purchased_items << purchased_item
                 puts `clear`
@@ -56,7 +56,6 @@ class Giftshop
         
         new_prompt = TTY::Prompt.new
         answer = new_prompt.select("What would you like to do?", ["Buy another item", "Go back to the Casino", "Exit Casino"])
-        binding.pry
         case answer
             when "Buy another item"
                 display_menu
@@ -64,7 +63,7 @@ class Giftshop
                 casino.display_menu
             when "Exit Casino"
                 puts `clear`
-                puts "Goodbye, Please come agian. Next time bring more money"
+                puts "Goodbye, Please come again. Next time bring more money"
                 exit
         end 
     end
