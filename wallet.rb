@@ -9,7 +9,7 @@ class Wallet
    @balance += num
   end
 
-  def remove_balance
+  def remove_balance(num)
     @balance -= num
   end
 
