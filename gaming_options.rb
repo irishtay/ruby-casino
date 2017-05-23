@@ -14,7 +14,7 @@ class Gaming_options
     @games << RussianRoulette.new(self, player)
     @games << Slots.new(self, player)
     @casino = casino
-    
+
     # Add New Games Here
 
   end

@@ -7,7 +7,6 @@ class Player
     attr_accessor :wallet, :name, :age, :purchased_items, :count, :drinks
 
     def initialize (wallet)
-       @name = name
        @wallet = wallet
        @purchased_items = []
        @drinks = []
@@ -21,7 +20,7 @@ class Player
         prompt = TTY::Prompt.new
 
 
-        name = prompt.ask('What is your Name?') do |q|
+        @name = prompt.ask('What is your Name?') do |q|
             q.required true
             q.modify :capitalize
         end
