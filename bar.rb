@@ -10,25 +10,27 @@ class Bar
         @casino = casino
         @player = player
         @drinks = []
-        drinks << Drink.new( { name: 'Beer', cost: 15.00 } )
-        drinks << Drink.new( { name: 'Wine', cost: 21.50 } )
+        drinks << Drink.new( { name: 'Beer', cost: 15 } )
+        drinks << Drink.new( { name: 'Wine', cost: 21 } )
     end
 
     def purchase_drink
         prompt = TTY::Prompt.new
         puts "Your current balance is #{player.wallet.get_balance}"
 
-        answer = prompt.select("What would you like to buy?", [ (drinks.map { |drink| drink.name }), "Return to the casino"])
+        answer = prompt.select("What would you like to buy?", [ (drinks.map { |drink| "#{drink.name} ($#{drink.cost})"  }), "Return to the casino"])
 
         case answer
             when 'Beer'
                 selected_drink = drinks[0].clone
                 player.drinks << selected_drink
+                player.wallet.remove_balance(selected_drink.cost)
                 puts `clear`
                 leave
             when 'Wine'
                 selected_drink = drinks[0].clone
                 player.drinks << selected_drink
+                player.wallet.remove_balance(selected_drink.cost)
                 puts `clear`
                 leave
             when 'Return to the casino'

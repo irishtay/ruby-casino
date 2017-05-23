@@ -29,21 +29,28 @@ class Blackjack
         player.wallet.remove_balance(20)
         player.drinks.clear
         puts "Enjoy your game."
+        play_game
       elsif answer == "Play it off"
-        Babbler.babble(30)
+        puts "#{Babbler.babble()} #{Babbler.babble()} #{Babbler.babble()} #{Babbler.babble()} #{Babbler.babble()}......"
+        sleep(1)
+        puts "#{Babbler.babble()} #{Babbler.babble()}  #{Babbler.babble()}......"
+        sleep(1)
+        puts "#{Babbler.babble()} #{Babbler.babble()} #{Babbler.babble()} #{Babbler.babble()}......\n\n"
         random_num = (-player.wallet.get_balance..player.wallet.get_balance).to_a.sample
         if random_num < 0 
           puts "You can't remember what happended but..."
           sleep(4)
-          puts "You just lost $#{random_num}"
+          puts "You lost $#{random_num}"
           player.wallet.remove_balance(random_num)
+          puts "Your balance now is #{player.wallet.get_balance}"
           sleep(6)
           options.display_menu_of_games
         elsif random_num > 0
           puts "You can't remember what happended but..."
           sleep(4)
-          puts "You just won $#{random_num}"
+          puts "You won $#{random_num}"
           player.wallet.add_money(random_num)
+          puts "Your balance now is #{player.wallet.get_balance}"
           sleep(6)
           options.display_menu_of_games
         else
