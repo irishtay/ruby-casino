@@ -1,3 +1,5 @@
+require 'tty-prompt'
+require 'pry'
 require_relative 'blackjack'
 require_relative 'russianroulette'
 
@@ -7,21 +9,25 @@ class Gaming_options
     @games = []
     @games << Blackjack.new(self, player)
     @games << RussianRoulette.new(self, player)
+    @games << Slots.new(self, player)
     # Add New Games Here
 
   end
 
   def display_menu_of_games
-    puts 'Select a Game'
-    @games.each_with_index { |game, index| puts "#{index.to_i + 1}) #{game.name}"}
+    puts `clear`
+    prompt = TTY::Prompt.new
+    game_selection = prompt.select("Select a game you would like to play", @games.map {|game| game.name})
 
-    game_selection = gets.strip.to_i
 
+    binding.pry
     case game_selection
-    when 1
-        @games[game_selection - 1].start_game
-    when 2
-        @games[game_selection - 1].start_game
+    when 'Blackjack'
+        @games[0].start_game
+    when 'Russian Roulette'
+        @games[1].start_game
+    when 'Slots'
+        @games[2].start_game
     end
 
   end

@@ -1,4 +1,5 @@
 require 'pry'
+require 'tty-prompt'
 require 'colorize'
 
 require_relative 'people'
@@ -8,6 +9,7 @@ class Casino
   attr_accessor :people, :gaming_options
 
   def initialize
+    puts `clear`
     puts 'Welcome to our Casino'
     @people = People.new
     @gaming_options = Gaming_options.new(people.players[0])
@@ -15,19 +17,19 @@ class Casino
   end
 
   def display_menu
-    puts '1) Begin a Game'
-    puts '2) Order Food and Drink'
-    puts '3) Visit Gift Shop'
-    puts '4) Exit Casino'
 
-    menu_selection = gets.to_i
+    prompt = TTY::Prompt.new
+
+    menu_selection = prompt.select("What would you like to do?", ["Begin a Game", "Order Food and Drink", "Visit Gift Shop", "Exit Casino"])
+
+    
 
     case menu_selection
-      when 1
+      when 'Begin a Game'
         gaming_options.display_menu_of_games
-      when 2
+      when "Order Food and Drink"
         # Buy Food or Drink
-      when 3 || 4
+      when "Visit Gift Shop" || "Exit Casino"
         # Visit Gift Shop
     end
 

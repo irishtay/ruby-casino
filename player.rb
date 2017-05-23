@@ -1,4 +1,4 @@
-
+require 'tty-prompt'
 require_relative 'wallet'
 
 class Player
@@ -12,17 +12,28 @@ class Player
     end
 
     def get_player_info
-        puts 'What is your name?'
-        @name = gets.strip
-
-        puts 'How old are you?'
-        temp_age = gets.strip.to_i
-        check_age(temp_age)
-        puts 'How much money do you have?'
-        temp_balance = gets.strip.to_i
-        check_balance(temp_balance)
+        
+        prompt = TTY::Prompt.new
 
 
+        name = prompt.ask('What is your Name?') do |q| 
+            q.required true
+            q.modify :capitalize
+        end
+
+        age = prompt.ask('What is your age?') do |q| 
+            q.required true
+            q.convert :int
+            q.validate(/^\d{1,2}$/, "Invalid age, try again")
+        end
+
+        wallet = prompt.ask('How much money do you have?') do |q| 
+            q.required true
+            q.convert :int
+            q.validate(/^\d*\.?\d{1,2}$/, "Invalid amount, try again")
+        end
+    
+        check_balance(wallet)
     end
 
     def check_bet(bet)

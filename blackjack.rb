@@ -74,14 +74,22 @@ class Blackjack
 
   def place_bet
     puts "How much do want to bet? Your current balance is #{player.wallet.get_balance}"
-    player_bet = gets.chomp
+      
+      player_bet = gets.chomp
 
-    if validate_bet?(player_bet)
-      @bet = player_bet.to_i
+    if player_bet.to_i < player.wallet.get_balance
+      if validate_bet?(player_bet) 
+        @bet = player_bet.to_i
+      else
+        put 'Invalid response, try again.'
+        place_bet      
+      end
     else
-      put 'Invalid response, try again.'
-      place_bet      
+      puts "You don't have enough money, try again."
+      place_bet
     end
+    
+
   end
 
   def validate_bet?(bet)
@@ -145,9 +153,9 @@ class Blackjack
         end_game
       sleep(1)
       end
-      puts "\n\nDealer stays."
-      sleep(1)
     end
+    puts "\n\nDealer stays."
+    sleep(1)
   end
 
   def end_game
