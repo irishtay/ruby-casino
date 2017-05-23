@@ -22,11 +22,12 @@ class Player
             q.modify :capitalize
         end
 
-        age = prompt.ask('What is your age?') do |q| 
+        player_age = prompt.ask('What is your age?') do |q| 
             q.required true
             q.convert :int
             q.validate(/^\d{1,2}$/, "Invalid age, try again")
         end
+        check_age(player_age)
 
         wallet = prompt.ask('How much money do you have?') do |q| 
             q.required true
@@ -34,6 +35,7 @@ class Player
             q.validate(/^\d*\.?\d{1,2}$/, "Invalid amount, try again")
         end
     
+        
         check_balance(wallet)
     end
 
@@ -49,7 +51,7 @@ class Player
 
     def check_age(temp_age)
         if temp_age < 18
-            puts 'GTFO'
+            puts 'You are too young, GTFO'
             exit
         else
             @age = temp_age
