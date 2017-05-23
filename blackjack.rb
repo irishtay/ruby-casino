@@ -1,3 +1,4 @@
+require 'tty-prompt'
 require_relative 'cards'
 
 class Blackjack
@@ -149,7 +150,11 @@ class Blackjack
     while count_total(dealer_hand) < 17
       puts "\n\nDealer hits"
       dealer_hand << deck.cards.pop
+      dealer_hand.each { |card| print "| #{card.rank} of #{card.suit} | " } 
+      print "Total: #{count_total(dealer_hand)}"
       if count_total(dealer_hand) > 21
+        dealer_hand.each { |card| print "| #{card.rank} of #{card.suit} | " } 
+        print "Total: #{count_total(dealer_hand)}" 
         end_game
       sleep(1)
       end
@@ -185,23 +190,23 @@ class Blackjack
 
   def display_menu
     sleep(3)
-    puts "\nWould you like to play again?"
-    puts "1) Yes"
-    puts "2) No"
+    prompt = TTY::Prompt.new
 
-    answer = gets.chomp
+    answer = prompt.select("\nWould you like to play again?", ["Yes", "No"])
+    #puts "\nWould you like to play again?"
+    #puts "1) Yes"
+    #puts "2) No"
 
-    if answer == '1'
+    #answer = gets.chomp
+
+    if answer == 'Yes'
       reset_deck
       puts `clear`
       play_game
-    elsif answer == '2'
+    elsif answer == 'No'
       puts "Goodbye"
       puts `clear`
       options.display_menu_of_games
-    else
-      puts "Invalid response, try again"
-      display_menu
     end
   end
   

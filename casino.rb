@@ -12,7 +12,7 @@ class Casino
     puts `clear`
     puts 'Welcome to our Casino'
     @people = People.new
-    @gaming_options = Gaming_options.new(people.players[0])
+    @gaming_options = Gaming_options.new(people.players[0], self)
     display_menu
   end
 
