@@ -29,38 +29,38 @@ class Horserace
         when 1
           charley
           if @play_option == 'Charley'
-            def define_winner
+            define_winner
           elsif
-            def define_loser
+            define_loser
           end
 
         when 2
           darth
           if @play_option == 'Darth Mare'
-            def define_winner
+            define_winner
           else
-            def define_loser
+            define_loser
           end
         when 3
           brony
           if @play_option == 'MyLittleBrony'
-            def define_winner
+            define_winner
           else
-            def define_loser
+            define_loser
           end
         when 4
           princess
           if @play_option == 'Princess Buttercup'
-            def define_winner
+            define_winner
           else
-            def define_loser
+            define_loser
           end
         when 5
           death
           if @play_option == 'Deathbringer'
-            def define_winner
+            define_winner
           else
-            def define_loser
+            define_loser
           end
       end
     sleep(2)
