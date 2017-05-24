@@ -12,6 +12,7 @@ class Horserace
     @player = player
     @outcomes = [1, 2, 3, 4, 5]
     @play_option = []
+    @answer
   end
 
   def start_game
@@ -19,7 +20,7 @@ class Horserace
     prompt = TTY::Prompt.new
     @play_option = prompt.select("#{name}, Welcome to the races! Pick your horse: ", @horsenames)
     puts "Great choice! How much would you like to put on your horse? Balance is #{player.wallet.get_balance}"
-    answer = gets.chomp.to_i
+    @answer = gets.chomp.to_i
     sleep(1)
     puts "AND THEY'RE OFF!"
     pid = fork{ exec 'afplay', "horserace.mp3" }
@@ -239,7 +240,7 @@ class Horserace
       puts "YOU WIN!!"
 
       puts "Go collect your winnings! (Press Enter)"
-      player.wallet.add_money(answer.to_i * 2)
+      player.wallet.add_money(@answer.to_i * 2)
       gets
       puts `killall afplay`
 
@@ -251,6 +252,7 @@ class Horserace
       puts "Tough break...maybe try your luck at Russian Roulette? (Press Enter)"
       gets
       puts `killall afplay`
+      player.wallet.remove_balance(@answer.to_i)
 
 
       options.display_menu_of_games
