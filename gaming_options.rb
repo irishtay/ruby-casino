@@ -3,6 +3,7 @@ require 'pry'
 require_relative 'blackjack'
 require_relative 'russianroulette'
 require_relative 'slots'
+require_relative 'horserace'
 
 class Gaming_options
 
@@ -13,6 +14,7 @@ class Gaming_options
     @games << Blackjack.new(self, player)
     @games << RussianRoulette.new(self, player)
     @games << Slots.new(self, player)
+    @games << Horserace.new(self, player)
     @casino = casino
 
     # Add New Games Here
@@ -32,6 +34,8 @@ class Gaming_options
         @games[1].start_game
     when 'Slots'
         @games[2].start_game
+    when 'Horse Race'
+        @games[3].start_game
     when 'Return to Main Menu'
         casino.display_menu
     end
