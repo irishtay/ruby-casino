@@ -88,6 +88,7 @@ class Slots
       puts "Your Balance is now #{player.wallet.get_balance}\n\n"
 
     elsif reel_array[0] == reel_array[1] && reel_array[1] == reel_array[2] && reel_array != ["bar", "bar", "bar"]
+      pid = fork{ exec 'afplay', "finish.mp3" }
       puts "3 of a Kind: $100"
       puts "------"
       player.wallet.add_money(100)
@@ -106,6 +107,7 @@ class Slots
       reel_array.count("Coin") == 2 ||
       reel_array.count("Lemmon") == 2
 
+      pid = fork{ exec 'afplay', "finish.mp3" }
       puts "2 of a Kind: $10"
       puts "------"
       player.wallet.add_money(10)
@@ -113,6 +115,7 @@ class Slots
 
 
     elsif reel_array.include?("Diamond")
+      pid = fork{ exec 'afplay', "finish.mp3" }
       puts "You Got Diamonds: $1"
       puts "------"
       player.wallet.add_money(1)
