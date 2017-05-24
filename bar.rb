@@ -5,33 +5,26 @@ require_relative 'drink'
 
 class Bar
 
-    attr_accessor :drinks, :casino, :player
+    attr_accessor :casino, :player
     def initialize(casino, player)
         @casino = casino
         @player = player
-        @drinks = []
-        drinks << Drink.new( { name: 'Beer', cost: 15 } )
-        drinks << Drink.new( { name: 'Wine', cost: 21 } )
     end
 
     def purchase_drink
         prompt = TTY::Prompt.new
         puts "Your current balance is #{player.wallet.get_balance}"
 
-        answer = prompt.select("What would you like to buy?", [ (drinks.map { |drink| "#{drink.name} ($#{drink.cost})"  }), "Return to the casino"])
+        answer = prompt.select("What would you like to buy?", [ "Beer ($15)", "Wine ($21)", "Return to the casino"])
 
         case answer
             when 'Beer ($15)'
-                selected_drink = drinks[0].clone
-                player.drinks << selected_drink
-                player.wallet.remove_balance(selected_drink.cost)
+                buy_drink(Drink.new( { name: 'Beer', cost: 15 } ))
                 pid = fork{ exec 'afplay', "open_beer_1.mp3" }
                 puts `clear`
                 leave
             when 'Wine ($21)'
-                selected_drink = drinks[0].clone
-                player.drinks << selected_drink
-                player.wallet.remove_balance(selected_drink.cost)
+                buy_drink(Drink.new( { name: 'Wine', cost: 21 } ))
                 pid = fork{ exec 'afplay', "cork.mp3" }
                 puts `clear`
                 leave
@@ -56,5 +49,12 @@ class Bar
         end
 
     end
+
+    def buy_drink(drink)
+        selected_drink = drink
+        player.wallet.remove_balance(selected_drink.cost)
+        player.drinks << selected_drink
+    end
+    
 
 end
