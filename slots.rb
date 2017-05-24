@@ -1,5 +1,6 @@
 require 'pry'
 require 'tty-prompt'
+require 'colorize'
 
 class Slots
 
@@ -9,7 +10,7 @@ class Slots
     @name = 'Slots'
     @options = gaming_options
     @player = player
-    @reel = ['apple', 'cherry', 'clover', 'heart', 'diamond', 'bar', 'coin']
+    @reel = ['apple'.colorize(:blue), 'cherry'.colorize(:red), 'clover'.colorize(:light_blue), 'heart', 'diamond'.colorize(:green), 'bar'.colorize(:yellow), 'coin'.colorize(:light_red)]
     @reel1 = ""
     @reel2 = ""
     @reel3 = ""
